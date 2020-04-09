@@ -1,0 +1,113 @@
+body {
+
+  font-family: Arial, Helvetica, sans-serif;
+  background: #e8f0fe;
+
+}
+
+.header {
+  width: 100%;
+  height: 55px;
+  padding: 10px 0px;
+  color: white;
+  background: #67B6EE;
+  text-align: center;
+  border-bottom: none;
+}
+
+.main {
+  background: white;
+  margin: 100px auto 0px;
+  width: 60%;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #67B6EE;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 10%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+/* Center the image */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+/* Size of the image */
+img.avatar {
+  width: 14%;
+  border-radius: 50%;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/*Inputs style*/
+.input-style{
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/*Align items login page*/
+.align-items-login {
+  text-align: center;
+  position: relative;
+}
+
+/*Align items register page*/
+.align-items-register {
+   margin-left: 29%;
+  
+}
+
+
+/*Align register link*/
+.align-sing-up{
+  text-align: right;
+  margin-right: 1%;
+  padding-bottom: 1%;
+}
+
+.contenedor-tabla{
+
+display: table;
+
+}
+
+.contenedor-fila{
+
+display: table-row;
+
+}
+
+.contenedor-columna{
+  display: table-cell;
+  padding-right: 5px;
+}
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>login</title>
+	
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+ 
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+  	
+	<!--	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	-->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="register.js"></script>
+	
+
+</head>
+<body>
+	
+<div>
+	
+	<div class="main">
+
+		<div class="header">
+		<h2>New member</h2>
+	</div>
+
+	<form class="modal-content animate" autocomplete="off">
+		<div class="imgcontainer">	      
+	      <img src="user.png" alt="Avatar" class="avatar">
+	    </div>
+
+	    <div class="contenedor-tabla align-items-register">
+
+		    <div class="contenedor-fila">
+		        <div class="contenedor-columna">
+					<label for="username"><b>Username</b></label>	      
+		         </div>
+
+		        <div class="contenedor-columna">
+		             <input id="name" class="input-style" type="text" placeholder="Enter username" name="username" required>
+		        </div>
+		    </div>
+		    <div class="contenedor-fila">
+		        <div class="contenedor-columna">
+					<label for="email"><b>Email</b></label>
+		         </div>
+
+		        <div class="contenedor-columna">
+		             <input id="email" class="input-style" type="email" placeholder="Enter email" name="email" required>
+		        </div>
+		    </div>
+		    <div class="contenedor-fila">
+		        <div class="contenedor-columna">
+					<label for="password"><b>Password</b></label>
+		         </div>
+
+		        <div class="contenedor-columna">
+		             <input id="password" class="input-style" type="password" placeholder="Enter password" name="password" required>
+		        </div>
+		    </div>
+		    <div class="contenedor-fila">
+		        <div class="contenedor-columna">
+					<label for="password"><b>Confirm<br>password</br></b></label>	      
+		         </div>
+
+		        <div class="contenedor-columna">
+		             <input id="con_password" class="input-style" type="password" placeholder="Confirm your password" name="con_password" required>
+		             <span id='msg'></span>
+		        </div>
+
+		        <div id="dialog" title="Success!" hidden="hidden">
+				  
+				</div>
+
+
+		    </div>
+
+		</div>
+
+	    <div class="align-items-login">
+	    	<button id = "button"type="button" name="register" class="button">Register</button>	    	
+
+	    </div>
+	    
+			
+	</form>
+
+	</div>
+
+</div>
+	
+
+</body>
+</html>

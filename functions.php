@@ -1,18 +1,13 @@
 <?php
-
-  function displayErrors($errors){
-		if(count($errors) > 0)
-		{
-			echo "<div id='error'>
-			<a href='#' onclick=\"showHide('error');\"></a>
-			<ul>";
-			foreach($errors as $error)
-			{
-				echo "<li>".$error."</li>";
-			}
-			echo "</ul>";
-			echo "</div>";
+	
+	//validate emty form login
+	function nullLogin($username, $password){
+		if(strlen(trim($username)) < 1 || strlen(trim($password)) < 1){
+			return true;
 		}
+		else{
+			return false;
+		}		
 	}
 	
    //Validate empty inputs
@@ -164,6 +159,85 @@
 		$result = $query->execute();
 		$query->close();
 		return $result;
+	}
+
+
+	//LOGIN VALIDATION
+	function checkLogin($username, $password){
+		global $mysqli;
+		
+		$query = $mysqli->prepare("SELECT id, password, status, token, email, username FROM users WHERE username = ? || email = ? LIMIT 1");
+		$query->bind_param("ss", $username, $username);
+		$query->execute();
+		$query->store_result();
+		$rows = $query->num_rows;
+
+		$query->bind_result($id, $db_password, $status, $token, $email, $username);
+		$query->fetch();
+		
+		if($rows > 0) {
+			
+			if($status == 1){
+				
+					$validPassw = password_verify($password, $db_password);
+				
+					if($validPassw){
+						lastSession($id);
+						$_SESSION['userId'] = $id;
+						
+						header("location: main.php");
+					} 
+					else {
+						$msg = "Wrong password!";
+					}
+			}
+			else {
+				$msg = 'Please check your inbox to finish your register
+			 or <a id="mailto" href="#" onclick="newEmail("'.$id.'");">send again</a> to receive a new email with the instructions.';
+				//Sending again email
+				//Generate new token
+			 /*
+				$newtoken = newToken();
+
+				//Update new token generated on BD
+				updateToken($newtoken,$id);
+
+				$url = 'http://'.$_SERVER["SERVER_NAME"].'/Portfolio/Login/activate.php?id='.$id.'&val='.$newtoken;
+				$subject = 'Email confirmation';
+				$body = "To finish your register, please press the following link <a href='$url'>Activate Account</a>";
+
+				sendEmail($email,$username, $subject, $body);
+				*/
+			}
+		}
+		else {
+			$msg = "Username or Password does not exists!";			
+		}
+			//return $msg;
+			echo $msg;
+			//echo json_encode($msg);
+	}
+
+	//Update new token generated on BD
+	function updateToken($newtoken,$id)
+	{
+		global $mysqli;
+		
+		$query = $mysqli->prepare("UPDATE users SET token= $newtoken WHERE id = ?");
+		$query->bind_param('s', $id);
+		$query->execute();
+		$query->close();
+	}	
+
+	//Update date of last session success from user
+	function lastSession($id)
+	{
+		global $mysqli;
+		
+		$query = $mysqli->prepare("UPDATE users SET last_session=NOW(), token_password='', password_request=1 WHERE id = ?");
+		$query->bind_param('s', $id);
+		$query->execute();
+		$query->close();
 	}
 		
 ?>

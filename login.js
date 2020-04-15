@@ -45,6 +45,19 @@ $( document ).ready(function() {
 });
 
 
-function newEmail(id){
-	console.log(id);
+function newEmail(id, username, email){
+	 var userData = {
+	 	userId: id,
+	 	username: username,
+	 	email: email
+	 }
+	 console.log("datos:" + userData.userId);
+	 $.ajax({
+				url:"http://localhost/Portfolio/Login/resend_mail.php",
+				type: "POST",
+				dataType: 'json',
+				data: {data: userData}
+			});
+
+	
 }

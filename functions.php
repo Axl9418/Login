@@ -1,4 +1,6 @@
 <?php
+
+	
 	
 	//validate emty form login
 	function nullLogin($username, $password){
@@ -193,7 +195,14 @@
 			}
 			else {
 				$msg = 'Please check your inbox to finish your register
-			 or <a id="mailto" href="#" onclick="newEmail("'.$id.'");">send again</a> to receive a new email with the instructions.';
+			 or <a id="mailto" href="#" onclick="newEmail(\''.str_replace("'", "\\'", $id).'\', \''.str_replace("'", "\\'", $username).'\',\''.str_replace("'", "\\'", $email).'\');">send again</a> to receive a new email with the instructions.';
+
+
+
+
+			 
+
+
 				//Sending again email
 				//Generate new token
 			 /*
@@ -239,5 +248,6 @@
 		$query->execute();
 		$query->close();
 	}
+
 		
 ?>

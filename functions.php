@@ -198,25 +198,6 @@
 			 or <a id="mailto" href="#" onclick="newEmail(\''.str_replace("'", "\\'", $id).'\', \''.str_replace("'", "\\'", $username).'\',\''.str_replace("'", "\\'", $email).'\');">send again</a> to receive a new email with the instructions.';
 
 
-
-
-			 
-
-
-				//Sending again email
-				//Generate new token
-			 /*
-				$newtoken = newToken();
-
-				//Update new token generated on BD
-				updateToken($newtoken,$id);
-
-				$url = 'http://'.$_SERVER["SERVER_NAME"].'/Portfolio/Login/activate.php?id='.$id.'&val='.$newtoken;
-				$subject = 'Email confirmation';
-				$body = "To finish your register, please press the following link <a href='$url'>Activate Account</a>";
-
-				sendEmail($email,$username, $subject, $body);
-				*/
 			}
 		}
 		else {
@@ -228,12 +209,12 @@
 	}
 
 	//Update new token generated on BD
-	function updateToken($newtoken,$id)
+	function updateToken($newtoken, $id)
 	{
 		global $mysqli;
 		
-		$query = $mysqli->prepare("UPDATE users SET token= $newtoken WHERE id = ?");
-		$query->bind_param('s', $id);
+		$query = $mysqli->prepare("UPDATE users SET token = ? WHERE id = ?");
+		$query->bind_param('ss',$newtoken, $id);
 		$query->execute();
 		$query->close();
 	}	

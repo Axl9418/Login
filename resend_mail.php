@@ -1,34 +1,34 @@
 <?php
 
-
-//print_r(json_decode($_POST['userData']));
-
-print_r($_POST['data'] -> userId);
-
-
-//Sending again email
-
-/*
+require 'conection.php';
 require 'functions.php';
 
+if (isset($_POST['data'])) {
 
-if (isset($_POST['userId'])) {
-			
-	$id = $_POST['userId'];
+	//Get json values
+	$obj = json_decode( $_POST['data']);
+
+	$id = $obj->{'userId'};
+	$username = $obj->{'user'};
+	$email = $obj->{'mail'};
+
 
 	//Generate new token
 	$newtoken = newToken();
 
 	//Update new token generated on BD
-	updateToken($newtoken,$id);
+	//updateToken($newtoken,$id);
 
 	$url = 'http://'.$_SERVER["SERVER_NAME"].'/Portfolio/Login/activate.php?id='.$id.'&val='.$newtoken;
 	$subject = 'Email confirmation';
 	$body = "To finish your register, please press the following link <a href='$url'>Activate Account</a>";
 
-	sendEmail($email,$username, $subject, $body);
+	//Sending again email
+	//sendEmail($email,$username, $subject, $body);
+	
+	return;
 				
 }
-*/
+
 
 ?>

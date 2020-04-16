@@ -2,10 +2,6 @@
 $( document ).ready(function() {
 
 
-
-
-
-
 	$('#login').validate({
 
 	    rules: {
@@ -48,15 +44,31 @@ $( document ).ready(function() {
 function newEmail(id, username, email){
 	 var userData = {
 	 	userId: id,
-	 	username: username,
-	 	email: email
+	 	user: username,
+	 	mail: email
 	 }
-	 console.log("datos:" + userData.userId);
 	 $.ajax({
 				url:"http://localhost/Portfolio/Login/resend_mail.php",
 				type: "POST",
 				dataType: 'json',
-				data: {data: userData}
+				data: {data: JSON.stringify(userData)},
+
+
+				  success: function(response) {	
+
+				  	//$('#dialog').modal('hide');	
+				  	console.log("pito pues" + response);
+
+				  },
+			      error: function (xhr, status, error) {
+			        console.log("error text" + xhr.responseText);
+			        console.log("status" + status);
+			        console.log("error" + error);
+			      },
+			      complete: function () {
+			        // Handle the complete event
+			        alert(" completed " );
+			      }
 			});
 
 	

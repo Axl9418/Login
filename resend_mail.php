@@ -23,10 +23,13 @@ if (isset($_POST['data'])) {
 	$subject = 'Email confirmation';
 	$body = "To finish your register, please press the following link <a href='$url'>Activate Account</a>";
 
-	//Sending again email
-	//sendEmail($email,$username, $subject, $body);
+		//Sending again email
+		if(sendEmail($email,$username, $subject, $body);){
+
+			echo true;
+
+		}
 	
-	return;
 				
 }
 

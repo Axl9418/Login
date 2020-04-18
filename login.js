@@ -43,7 +43,7 @@ $( document ).ready(function() {
 
 function newEmail(id, username, email){
 	 var userData = {
-	 	userId: id,
+	 	userId: id,	
 	 	user: username,
 	 	mail: email
 	 }
@@ -56,19 +56,12 @@ function newEmail(id, username, email){
 
 				  success: function(response) {	
 
-				  	//$('#dialog').modal('hide');	
-				  	console.log("pito pues" + response);
+				  	if(response == true){
+				  		$('form :input').val('');
+				  		$('#msg').html("A new email with the instructions to finish the register has been sent to " +  email); 
+				 	 }
 
-				  },
-			      error: function (xhr, status, error) {
-			        console.log("error text" + xhr.responseText);
-			        console.log("status" + status);
-			        console.log("error" + error);
-			      },
-			      complete: function () {
-			        // Handle the complete event
-			        alert(" completed " );
-			      }
+				  }
 			});
 
 	

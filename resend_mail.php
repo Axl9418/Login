@@ -17,7 +17,7 @@ if (isset($_POST['data'])) {
 	$newtoken = newToken();
 
 	//Update new token generated on BD
-	//updateToken($newtoken,$id);
+	updateToken($newtoken,$id);
 
 	$url = 'http://'.$_SERVER["SERVER_NAME"].'/Portfolio/Login/activate.php?id='.$id.'&val='.$newtoken;
 	$subject = 'Email confirmation';

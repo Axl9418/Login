@@ -25,10 +25,15 @@ $( document ).ready(function() {
 				    username: $('#username').val(),				    
 				    password: $('#password').val(),				    
 				  },
-				  success: function( result ) {	
+				  success: function( result ) {				  	
 
-				  	$('#msg').html(result); 
-					$('#dialog').modal('show');	
+					  	if(result != false){
+					  		$('#msg').html(result); 
+							$('#dialog').modal('show');	
+					  	}
+					  	else{
+					  		window.location.href = "http://localhost/Portfolio/Login/main.php";
+					  	}
 
 				  }
 

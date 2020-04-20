@@ -1,6 +1,4 @@
 <?php
-
-	
 	
 	//validate emty form login
 	function nullLogin($username, $password){
@@ -184,10 +182,11 @@
 					$validPassw = password_verify($password, $db_password);
 				
 					if($validPassw){
+
 						lastSession($id);
 						$_SESSION['userId'] = $id;
-						
-						header("location: main.php");
+						$msg = false;
+
 					} 
 					else {
 						$msg = "Wrong password!";
@@ -203,14 +202,12 @@
 		else {
 			$msg = "Username or Password does not exists!";			
 		}
-			//return $msg;
-			echo $msg;
-			//echo json_encode($msg);
+				
+		echo $msg;
 	}
 
 	//Update new token generated on BD
-	function updateToken($newtoken, $id)
-	{
+	function updateToken($newtoken, $id){
 		global $mysqli;
 		
 		$query = $mysqli->prepare("UPDATE users SET token = ? WHERE id = ?");
@@ -220,14 +217,33 @@
 	}	
 
 	//Update date of last session success from user
-	function lastSession($id)
-	{
+	function lastSession($id){
 		global $mysqli;
 		
 		$query = $mysqli->prepare("UPDATE users SET last_session=NOW(), token_password='', password_request=1 WHERE id = ?");
 		$query->bind_param('s', $id);
 		$query->execute();
 		$query->close();
+	}
+
+	function isLogged($id){
+		global $mysqli;
+		
+		$query = $mysqli->prepare("SELECT username FROM users WHERE id = ? LIMIT 1");
+		$query->bind_param('s', $id);
+		$query->execute();
+		$query->store_result();
+
+		$rows = $query->num_rows;
+		
+			if($rows > 0) {
+				$query->bind_result($username);
+				$query->fetch();
+
+				return $username;			
+			}
+
+		
 	}
 
 		

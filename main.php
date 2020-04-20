@@ -1,5 +1,5 @@
 <?php
-/*
+
 	session_start();
 
 	require 'conection.php';
@@ -8,16 +8,14 @@
 	if(!isset($_SESSION["userId"])){ 
 		header("Location: login.html");
 	}
-	
-	$userId = $_SESSION['userId'];
-	
+	else{
 
-	//hacer una funcion 
-	$sql = "SELECT id, username FROM users WHERE id = '$userId'";
-	$result = $mysqli->query($sql);
-	
-	$row = $result->fetch_assoc();
-*/
+		$userId = $_SESSION['userId'];
 
-	echo "HOLAAAAAAAAAAAAAAAAA";
+		isLogged($userId);
+
+	}
+	
+	echo '<a href=logout.php>Logout</a>'
+	
 ?>

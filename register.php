@@ -29,7 +29,7 @@
 		}
 	
 		//Validate if the email adress already exists in the database.
-		if(existsUser($email)){
+		if(existsUser($email) > 0){
 			$errors[] = "The email: $email has already used in other register, please use another emai";
 		}
 		*/

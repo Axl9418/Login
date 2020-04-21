@@ -6,7 +6,7 @@
 	session_start(); //Start a new session or restart
 	
 	if(isset($_SESSION["userId"])){ 
-		header("Location: main.php");
+		//header("Location: main.php");
 	}
 
 	$errors = array();

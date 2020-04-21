@@ -54,12 +54,13 @@
 		$query->execute();
 		$query->store_result();
 		$num = $query->num_rows;
-		$query->close();
+		$query->bind_result($id);
+		$query->fetch();
 		
 		if ($num > 0){
-			return true;
+			return $id;
 			} else {
-			return false;
+			return 0;
 		}
 	}
 
@@ -190,6 +191,8 @@
 					} 
 					else {
 						$msg = "Wrong password!";
+
+						
 					}
 			}
 			else {
@@ -245,6 +248,86 @@
 
 		
 	}
+
+	
+
+
+	function newTokenPass($id){
+		global $mysqli;
+		
+		$token = newtoken();
+		
+		$stmt = $mysqli->prepare("UPDATE users SET token_password=?, password_request=1 WHERE id = ?");
+		$stmt->bind_param('ss', $token, $id);
+		$stmt->execute();
+		$stmt->close();
+		
+		return $token;
+	}
+
+
+
+
+
+	function getPasswordRequest($id)
+	{
+		global $mysqli;
+		
+		$query = $mysqli->prepare("SELECT password_request FROM users WHERE id = ?");
+		$query->bind_param('i', $id);
+		$query->execute();
+		$query->bind_result($_id);
+		$query->fetch();
+		
+		if ($_id == 1){
+			return true;
+		}
+		else
+		{
+			return null;	
+		}
+	}
+	
+	function validateTokenPass($id, $token){
+		
+		global $mysqli;
+		
+		$query = $mysqli->prepare("SELECT status FROM users WHERE id = ? AND token_password = ? AND password_request = 1 LIMIT 1");
+		$query->bind_param('is', $id, $token);
+		$query->execute();
+		$query->store_result();
+		$num = $query->num_rows;
+		
+		if ($num > 0){
+			$query->bind_result($status);
+			$query->fetch();
+
+				if($status == 1){
+					return true;
+				}
+				else {
+					return false;
+				}
+		}
+		else{
+			return false;	
+		}
+	}
+	
+	function restorePassword($password, $id, $token){
+		
+		global $mysqli;
+		
+		$query = $mysqli->prepare("UPDATE users SET password = ?, token_password='', password_request=0 WHERE id = ? AND token_password = ?");
+		$query->bind_param('sis', $password, $id, $token);
+		
+		if($query->execute()){
+			return true;
+			} 
+			else {
+			return false;		
+		}
+	}		
 
 		
 ?>

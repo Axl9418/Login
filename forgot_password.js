@@ -17,18 +17,18 @@ $( document ).ready(function() {
 
 	    submitHandler: function(send) {
 	        $.ajax({
-				  url: "http://localhost/Portfolio/Login/validate.php",
+				  url: "http://localhost/Portfolio/Login/forgot_password.php",
 				  type: "POST",
 				  data: {
 				    email: $('#email').val()			    				    
 				  },
 				  success: function( result ) {				  	
-
-					  	$('#msg').html(result); 
+					  	$('#msg').html(result);
+					  	console.log('entro'); 
 						$('#dialog').modal('show');	
 
 						$("#dialog").on("hidden.bs.modal", function () {
-					    	window.location.replace("http://localhost/Portfolio/Login/login.html");
+					    	window.location.replace("http://localhost/Portfolio/Login/login.html");					    	
 						});
 					  	
 				  }

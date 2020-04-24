@@ -4,7 +4,6 @@
 
 	session_start();
 
-	$errors = array();
 	
 	if(empty($_GET['id']) || empty($_GET['token'])){
 		header('Location: login.html');
@@ -13,9 +12,7 @@
 	$id = $mysqli->real_escape_string($_GET['id']);
 	$token = $mysqli->real_escape_string($_GET['token']);
 	
-	if(!validateTokenPass($id, $token)){
-		$errors = 'We cannot validate data!';		
-	} 
+	
 	
 ?>
 
@@ -71,7 +68,7 @@
 
 
 	    <div class="align-items-login">
-	    	<button id="update" type="button" name="update" class="button" onclick="restore_pass(<?php echo $id ?>)">Update</button>
+	    	<button id="update" type="submit" name="update" class="button" onclick="restore_pass('<?php echo $id ?>','<?php echo $token ?>');">Update</button>
 	    </div>
 
 

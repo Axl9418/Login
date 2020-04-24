@@ -1,3 +1,16 @@
+var user_id=0;
+var	user_token=0;
+
+
+function restore_pass(id, token){
+
+	user_id= id;
+	user_token= token;
+	
+}
+
+
+
 $( document ).ready(function() {
 
 	$('#restore_pass').validate({
@@ -22,35 +35,54 @@ $( document ).ready(function() {
 	    		required: "Please, confirm your password.",
 	    		equalTo: "Please enter the same password again."
 	    	}
-	    }
+	    },
+				submitHandler: function( update ) {						
+					$.ajax({
+					  url: "http://localhost/Portfolio/Login/update_password.php",
+				 	  type: "POST",
+					  data: {
+					  	user_id,
+					  	user_token,
+					    password: $('#password').val(),				    
+					    con_password: $('#con_password').val()	    
+					  },
+				  success: function( result ) {				
+
+				  		if(result != false){
+					  		$('#msg').html(result); 
+							$('#dialog').modal('show');	
+					  	}
+					  	else{
+					  		window.location.href = "http://localhost/Portfolio/Login/login.html";
+					  	}  	
+								  					  						  	
+
+				  }
+
+					});
+				}
 
 	    
 	});
+
+	
 
 });
 
 
 
-//falta pasar el token
-function restore_pass(id){
+/*
+function restore_pass(id, token){
 
 	var restoreData = {
 		 	userId: id,	
-		 	
+		 	userToken: token,
 		 	password: $('#password').val(),
 			con_password: $('#con_password').val()
 		}
-
-console.log('Funciona');
-/*
-			 
-			 $.ajax({
-						url:"http://localhost/Portfolio/Login/update_password.php",
-						type: "POST",
-						dataType: 'json',
-						data: {data: JSON.stringify(restoreData)},
-						  
-					});
-*/
+		//console.log(restoreData);
 	
 }
+*/
+
+
